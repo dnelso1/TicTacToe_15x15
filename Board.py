@@ -1,4 +1,4 @@
-# Description: The class FiveBoard represents the board for a two-player tic-tac-toe game, but
+# Description: The class Board represents the board for a two-player tic-tac-toe game, but
 #              it's played on a 15x15 board and the goal is to get 5 in row.
 #
 #              Players can move their pieces using the make_move function, which takes either an 'x' or 'o',
