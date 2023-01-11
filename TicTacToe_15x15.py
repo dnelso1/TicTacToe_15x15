@@ -58,70 +58,15 @@ class FiveBoard:
 
         # records the player's move at the [row][column] space
         board[row][column] = player
-        # if 'x' has 5 in a row, the game state is updated to X_WON
-        if self.x_wins():
-            self._current_state = "X_WON"
-        # if 'o' has 5 in a row, the game state is updated to O_WON
-        elif self.check_if_winner():
-            self._current_state = "O_WON"
+        # if the current player has 5 in a row, the game state is updated to <player>_WON
+        if self.is_winner(player):
+            self._current_state = f"{player.upper()}_WON"
         # if there are no available moves left and neither player has won, the game state is changed to DRAW
         elif self.is_draw() == 0:
             self._current_state = "DRAW"
         return True
 
-    def print_board(self, board):
-        top_border = ["_" for _ in range(15)]
-        for r in board:
-            displayed_row = "|"
-            for c in range(len(r)):
-                #print(r[c]),
-                displayed_row += f"{r[c]}|"
-                print(top_border)
-            print(displayed_row)
-            
-
-    def x_wins(self):
-        """Checks if 'x' has won by getting 5 in a row horizontally, vertically, or diagonally."""
-        board = self._board
-        for row in range(len(board)):
-            for column in range(len(board[row])):
-                # checks for wins when the rows are between 0-10 and columns are between 0-10
-                if row <= 10 and column <= 10:
-                    # checks for a vertical win
-                    if board[row][column] == 'x' and board[row + 1][column] == 'x' and board[row + 2][column] == 'x' and board[row + 3][column] == 'x' and board[row + 4][column] == 'x':
-                        self._current_state = "X_WON"
-                    # checks for a horizontal win
-                    if board[row][column] == 'x' and board[row][column + 1] == 'x' and board[row][column + 2] == 'x' and board[row][column + 3] == 'x' and board[row][column + 4] == 'x':
-                        self._current_state = "X_WON"
-                    # checks for a diagonal win with a decreasing slope (such as \ )
-                    elif board[row][column] == 'x' and board[row + 1][column + 1] == 'x' and board[row + 2][column + 2] == 'x' and board[row + 3][column + 3] == 'x' and board[row + 4][column + 4] == 'x':
-                        self._current_state = "X_WON"
-                    # checks for a diagonal win with an increasing slope (such as / )
-                    elif board[row][column] == 'x' and board[row + 1][column - 1] == 'x' and board[row + 2][column - 2] == 'x' and board[row + 3][column - 3] == 'x' and board[row + 4][column - 4] == 'x':
-                        self._current_state = "X_WON"
-                # checks for wins when the rows are between 11-14 and columns are between 0-10
-                elif row >= 11 and column <= 10:
-                    # checks for a horizontal win
-                    if board[row][column] == 'x' and board[row][column + 1] == 'x' and board[row][column + 2] == 'x' and board[row][column + 3] == 'x' and board[row][column + 4] == 'x':
-                        self._current_state = "X_WON"
-                # checks for wins when the rows are between 0-10 and columns are between 11-14
-                elif row <= 10 and column >= 11:
-                    # checks for a vertical win
-                    if board[row][column] == 'x' and board[row + 1][column] == 'x' and board[row + 2][column] == 'x' and board[row + 3][column] == 'x' and board[row + 4][column] == 'x':
-                        self._current_state = "X_WON"
-                    # checks for a diagonal win with an increasing slope (such as / )
-                    elif board[row][column] == 'x' and board[row + 1][column - 1] == 'x' and board[row + 2][column - 2] == 'x' and board[row + 3][column - 3] == 'x' and board[row + 4][column - 4] == 'x':
-                        self._current_state = "X_WON"
-                # checks for wins when the rows are between 11-14 and columns are between 11-14
-                elif row >= 11 and column >= 11:
-                    # checks for a vertical win
-                    if board[row][column] == 'x' and board[row - 1][column] == 'x' and board[row - 2][column] == 'x' and board[row - 3][column] == 'x' and board[row - 4][column] == 'x':
-                        self._current_state = "X_WON"
-                    # checks for a horizontal win
-                    elif board[row][column] == 'x' and board[row][column - 1] == 'x' and board[row][column - 2] == 'x' and board[row][column - 3] == 'x' and board[row][column - 4] == 'x':
-                        self._current_state = "X_WON"
-
-    def check_if_winner(self, player):
+    def is_winner(self, player):
         """Checks if a player has won by getting 5 in a row horizontally, vertically, or diagonally."""
         board = self._board
         for row in range(len(board)):
@@ -129,38 +74,40 @@ class FiveBoard:
                 # checks for wins when the rows are between 0-10 and columns are between 0-10
                 if row <= 10 and column <= 10:
                     # checks for a vertical win
-                    if board[row][column] == player and board[row + 1][column] == 'o' and board[row + 2][column] == 'o' and board[row + 3][column] == 'o' and board[row + 4][column] == 'o':
-                        self._current_state = "O_WON"
+                    if board[row][column] == player and board[row + 1][column] == player and board[row + 2][column] == player and board[row + 3][column] == player and board[row + 4][column] == player:
+                        return True
                     # checks for a horizontal win
-                    if board[row][column] == 'o' and board[row][column + 1] == 'o' and board[row][column + 2] == 'o' and board[row][column + 3] == 'o' and board[row][column + 4] == 'o':
-                        self._current_state = "O_WON"
+                    if board[row][column] == player and board[row][column + 1] == player and board[row][column + 2] == player and board[row][column + 3] == player and board[row][column + 4] == player:
+                        return True
                     # checks for a diagonal win with a decreasing slope (such as \ )
-                    elif board[row][column] == 'o' and board[row + 1][column + 1] == 'o' and board[row + 2][column + 2] == 'o' and board[row + 3][column + 3] == 'o' and board[row + 4][column + 4] == 'o':
-                        self._current_state = "O_WON"
+                    elif board[row][column] == player and board[row + 1][column + 1] == player and board[row + 2][column + 2] == player and board[row + 3][column + 3] == player and board[row + 4][column + 4] == player:
+                        return True
                     # checks for a diagonal win with a increasing slope (such as / )
-                    elif board[row][column] == 'o' and board[row + 1][column - 1] == 'o' and board[row + 2][column - 2] == 'o' and board[row + 3][column - 3] == 'o' and board[row + 4][column - 4] == 'o':
-                        self._current_state = "O_WON"
+                    elif board[row][column] == player and board[row + 1][column - 1] == player and board[row + 2][column - 2] == player and board[row + 3][column - 3] == player and board[row + 4][column - 4] == player:
+                        return True
                 # checks for wins when the rows are between 11-14 and columns are between 0-10
                 elif row >= 11 and column <= 10:
                     # checks for a horizontal win
-                    if board[row][column] == 'o' and board[row][column + 1] == 'o' and board[row][column + 2] == 'o' and board[row][column + 3] == 'o' and board[row][column + 4] == 'o':
-                        self._current_state = "O_WON"
+                    if board[row][column] == player and board[row][column + 1] == player and board[row][column + 2] == player and board[row][column + 3] == player and board[row][column + 4] == player:
+                        return True
                 # checks for wins when the rows are between 0-10 and columns are between 11-14
                 elif row <= 10 and column >= 11:
                     # checks for a vertical win
-                    if board[row][column] == 'o' and board[row + 1][column] == 'o' and board[row + 2][column] == 'o' and board[row + 3][column] == 'o' and board[row + 4][column] == 'o':
-                        self._current_state = "O_WON"
+                    if board[row][column] == player and board[row + 1][column] == player and board[row + 2][column] == player and board[row + 3][column] == player and board[row + 4][column] == player:
+                        return True
                     # checks for a diagonal win with an increasing slope (such as / )
-                    elif board[row][column] == 'o' and board[row + 1][column - 1] == 'o' and board[row + 2][column - 2] == 'o' and board[row + 3][column - 3] == 'o' and board[row + 4][column - 4] == 'o':
-                        self._current_state = "O_WON"
+                    elif board[row][column] == player and board[row + 1][column - 1] == player and board[row + 2][column - 2] == player and board[row + 3][column - 3] == player and board[row + 4][column - 4] == player:
+                        return True
                 # checks for wins when the rows are between 11-14 and columns are between 11-14
                 elif row >= 11 and column >= 11:
                     # checks for a vertical win
-                    if board[row][column] == 'o' and board[row - 1][column] == 'o' and board[row - 2][column] == 'o' and board[row - 3][column] == 'o' and board[row - 4][column] == 'o':
-                        self._current_state = "O_WON"
+                    if board[row][column] == player and board[row - 1][column] == player and board[row - 2][column] == player and board[row - 3][column] == player and board[row - 4][column] == player:
+                        return True
                     # checks for a horizontal win
-                    elif board[row][column] == 'o' and board[row][column - 1] == 'o' and board[row][column - 2] == 'o' and board[row][column - 3] == 'o' and board[row][column - 4] == 'o':
-                        self._current_state = "O_WON"
+                    elif board[row][column] == player and board[row][column - 1] == player and board[row][column - 2] == player and board[row][column - 3] == player and board[row][column - 4] == player:
+                        return True
+        
+        return False
 
     def is_draw(self):
         """Checks the conditions for a DRAW. Returns the number of available moves remaining"""
@@ -173,6 +120,16 @@ class FiveBoard:
                 if board[row][column] == ' ' and (self._current_state != "X_WON" or self._current_state != "O_WON"):
                     available_moves += 1
         return available_moves
+
+    def print_board(self, board):
+        top_border = ["_" for _ in range(15)]
+        for r in board:
+            displayed_row = "|"
+            for c in range(len(r)):
+                #print(r[c]),
+                displayed_row += f"{r[c]}|"
+                print(top_border)
+            print(displayed_row)
 
 if __name__ == '__main__':
     board = FiveBoard()
