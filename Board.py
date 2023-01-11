@@ -135,3 +135,5 @@ class Board:
             print(horizontal_border)
             print(displayed_row)
         print(horizontal_border)
+
+board_inst = Board()
