@@ -135,15 +135,3 @@ class Board:
             print(horizontal_border)
             print(displayed_row)
         print(horizontal_border)
-
-if __name__ == '__main__':
-    board = Board()
-    board.make_move(0, 0, 'o')
-    board.print_board()
-    board.make_move(6, 5, 'x')
-    board.print_board()
-    board.make_move(2, 1, 'x')
-    board.print_board()
-    board.make_move(3, 2, 'x')
-    board.print_board()
-    print(board.get_current_state())

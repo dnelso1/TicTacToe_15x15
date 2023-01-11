@@ -4,7 +4,7 @@ class Game:
     def make_move(self, row, col, player):
         """Makes a move based on the given [row][col] position and which player is making a turn, 'x' or 'o'"""
         board = Board.get_board()
-        print(board)
+        
         # returns False if there is a player occupying the [row][col] space or if the game has been won or drawn
         if board[row][col] == player or Board.get_current_sate() != "UNFINISHED":
             return False
