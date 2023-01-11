@@ -51,8 +51,7 @@ class FiveBoard:
     def make_move(self, row, column, player):
         """Makes a move based on the given [row][column] position and which player is making a turn, 'x' or 'o'"""
         board = self._board
-        for r in board:
-            print(r)
+        self.print_board(board)
         # returns False if there is a player occupying the [row][column] space or if the game has been won or drawn
         if board[row][column] == 'x' or board[row][column] == 'o' or self._current_state != "UNFINISHED":
             return False
@@ -60,17 +59,28 @@ class FiveBoard:
             # records the player's move at the [row][column] space
             board[row][column] = player
             # if 'x' has 5 in a row, the game state is updated to X_WON
-            if self.is_x_won():
+            if self.x_wins():
                 self._current_state = "X_WON"
             # if 'o' has 5 in a row, the game state is updated to O_WON
-            elif self.is_o_won():
+            elif self.o_wins():
                 self._current_state = "O_WON"
             # if there are no available moves left and neither player has won, the game state is changed to DRAW
             elif self.is_draw() == 0:
                 self._current_state = "DRAW"
             return True
 
-    def is_x_won(self):
+    def print_board(self, board):
+        top_border = ["_" for _ in range(15)]
+        for r in board:
+            displayed_row = "|"
+            for c in range(len(r)):
+                #print(r[c]),
+                displayed_row += f"{r[c]}|"
+                print(top_border)
+            print(displayed_row)
+            
+
+    def x_wins(self):
         """Checks if 'x' has won by getting 5 in a row horizontally, vertically, or diagonally."""
         board = self._board
         for row in range(len(board)):
@@ -111,7 +121,7 @@ class FiveBoard:
                     elif board[row][column] == 'x' and board[row][column - 1] == 'x' and board[row][column - 2] == 'x' and board[row][column - 3] == 'x' and board[row][column - 4] == 'x':
                         self._current_state = "X_WON"
 
-    def is_o_won(self):
+    def o_wins(self):
         """Checks if 'o' has won by getting 5 in a row horizontally, vertically, or diagonally."""
         board = self._board
         for row in range(len(board)):
