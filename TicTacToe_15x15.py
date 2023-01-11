@@ -1,7 +1,5 @@
-# Author: Andrew Nelson
-# Date: 06/04/2020
-# Description: A class called FiveBoard represents the board for a two-player tic-tac-toe game, but
-#              instead it's played on a 15x15 board and the goal is to get 5 in row.
+# Description: The class FiveBoard represents the board for a two-player tic-tac-toe game, but
+#              it's played on a 15x15 board and the goal is to get 5 in row.
 #
 #              Players can move their pieces using the make_move function, which takes either an 'x' or 'o',
 #              depending on which player is making the move and the row/column position on the board where the 'x'/'o'
@@ -42,24 +40,8 @@ board.get_current_state()
 class FiveBoard:
     """Represents the board for a tic-tac-toe game played on a 15x15 square grid"""
     def __init__(self):
-        """Initializes the 15x15 board with empty strings and the state of gameplay as UNFINISHED"""
-        self._board = [
-            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
-        ]
+        """Initializes the 15x15 board with spaces and the state of gameplay as UNFINISHED"""
+        self._board = [[' ' for x in range(15)] for y in range(15)]
         self._current_state = "UNFINISHED"
 
     def get_current_state(self):
