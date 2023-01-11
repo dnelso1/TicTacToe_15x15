@@ -73,38 +73,20 @@ class FiveBoard:
             for col in range(len(board[row])):
                 # checks for wins when the rows are between 0-10 and columns are between 0-10
                 if row <= 10 and col <= 10:
-                    # checks for a vertical win
-                    if self.is_vertical_win(row, col, player):
-                        return True
-                    # checks for a horizontal win
-                    if self.is_horizontal_win(row, col, player):
-                        return True
-                    # checks for a diagonal win with a decreasing slope (such as \ )
-                    elif self.is_diagonal_win_decreasing(row, col, player):
-                        return True
-                    # checks for a diagonal win with a increasing slope (such as / )
-                    elif self.is_diagonal_win_increasing(row, col, player):
+                    if self.is_vertical_win(row, col, player) or self.is_horizontal_win(row, col, player) or self.is_diagonal_win_decreasing(row, col, player) or self.is_diagonal_win_increasing(row, col, player):
                         return True
                 # checks for wins when the rows are between 11-14 and columns are between 0-10
                 elif row >= 11 and col <= 10:
-                    # checks for a horizontal win
                     if self.is_horizontal_win(row, col, player):
                         return True
                 # checks for wins when the rows are between 0-10 and columns are between 11-14
                 elif row <= 10 and col >= 11:
-                    # checks for a vertical win
-                    if self.is_vertical_win(row, col, player):
-                        return True
-                    # checks for a diagonal win with an increasing slope (such as / )
-                    elif self.is_diagonal_win_increasing(row, col, player):
+                    if self.is_vertical_win(row, col, player) or self.is_diagonal_win_increasing(row, col, player):
                         return True
                 # checks for wins when the rows are between 11-14 and columns are between 11-14
                 elif row >= 11 and col >= 11:
                     # checks for a vertical win
-                    if self.is_vertical_win(row, col, player):
-                        return True
-                    # checks for a horizontal win
-                    if self.is_horizontal_win(row, col, player):
+                    if self.is_vertical_win(row, col, player) or self.is_horizontal_win(row, col, player):
                         return True
         
         return False
