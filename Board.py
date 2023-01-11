@@ -44,15 +44,15 @@ class Board:
         self._board = [[' ' for x in range(15)] for y in range(15)]
         self._current_state = "UNFINISHED"
 
-    def get_current_state(self):
+    def get_current_state(self) -> str:
         """Returns the current state of the board"""
         return self._current_state
 
-    def set_current_state(self, state):
+    def set_current_state(self, state) -> str:
         """Sets the current state of the board"""
         self._current_state = state
 
-    def is_winner(self, row, col, player):
+    def is_winner(self, row, col, player) -> bool:
         """Checks if a player has won by getting 5 in a row horizontally, vertically, or diagonally."""
         # checks for wins when the rows are between 0-10 and columns are between 0-10
         if row <= 10 and col <= 10:
@@ -74,7 +74,7 @@ class Board:
         
         return False
 
-    def is_draw(self):
+    def is_draw(self) -> int:
         """Checks the conditions for a DRAW, which is when all squares are filled, but there is no winner. Returns the number of available moves remaining"""
         board = self._board
         available_moves = 0
@@ -86,7 +86,7 @@ class Board:
                     available_moves += 1
         return available_moves
 
-    def is_vertical_win(self, row, col, player):
+    def is_vertical_win(self, row, col, player) -> bool:
         """Checks for a vertical win. Returns True if a win exists, False otherwise"""
         board = self._board
         vertical_counting_up = board[row][col] == player and board[row + 1][col] == player and board[row + 2][col] == player and board[row + 3][col] == player and board[row + 4][col] == player
@@ -97,7 +97,7 @@ class Board:
         
         return False
 
-    def is_horizontal_win(self, row, col, player):
+    def is_horizontal_win(self, row, col, player) -> bool:
         """Checks for a horizontal win. Returns True if a win exists, False otherwise"""
         board = self._board
         horizontal_counting_right = board[row][col] == player and board[row][col + 1] == player and board[row][col + 2] == player and board[row][col + 3] == player and board[row][col + 4] == player
@@ -108,21 +108,21 @@ class Board:
         
         return False
 
-    def is_diagonal_win_decreasing(self, row, col, player):
+    def is_diagonal_win_decreasing(self, row, col, player) -> bool:
         """Checks for a diagonal win with a decreasing slope (such as \ ). Returns True if a win exists, False otherwise"""
         board = self._board
         return board[row][col] == player and board[row + 1][col + 1] == player and board[row + 2][col + 2] == player and board[row + 3][col + 3] == player and board[row + 4][col + 4] == player
 
-    def is_diagonal_win_increasing(self, row, col, player):
+    def is_diagonal_win_increasing(self, row, col, player) -> bool:
         """Checks for a diagonal win with a increasing slope (such as \ ). Returns True if a win exists, False otherwise"""
         board = self._board
         return board[row][col] == player and board[row + 1][col - 1] == player and board[row + 2][col - 2] == player and board[row + 3][col - 3] == player and board[row + 4][col - 4] == player
 
-    def get_board(self):
+    def get_board(self) -> bool:
         """Returns the current board"""
         return self._board
 
-    def print_board(self):
+    def print_board(self) -> None:
         """Prints the board to the screen"""
         print("\n\n\n\n")
         board = self._board
