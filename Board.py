@@ -108,6 +108,7 @@ class Board:
 
     def is_vertical_win(self, row, col, player):
         """Checks for a vertical win. Returns True if a win exists, False otherwise"""
+        board = self._board
         vertical_counting_up = board[row][col] == player and board[row + 1][col] == player and board[row + 2][col] == player and board[row + 3][col] == player and board[row + 4][col] == player
         vertical_counting_down = board[row][col] == player and board[row - 1][col] == player and board[row - 2][col] == player and board[row - 3][col] == player and board[row - 4][col] == player
         
@@ -118,6 +119,7 @@ class Board:
 
     def is_horizontal_win(self, row, col, player):
         """Checks for a horizontal win. Returns True if a win exists, False otherwise"""
+        board = self._board
         horizontal_counting_right = board[row][col] == player and board[row][col + 1] == player and board[row][col + 2] == player and board[row][col + 3] == player and board[row][col + 4] == player
         horizontal_counting_left = board[row][col] == player and board[row][col - 1] == player and board[row][col - 2] == player and board[row][col - 3] == player and board[row][col - 4] == player
 
@@ -128,13 +130,16 @@ class Board:
 
     def is_diagonal_win_decreasing(self, row, col, player):
         """Checks for a diagonal win with a decreasing slope (such as \ ). Returns True if a win exists, False otherwise"""
+        board = self._board
         return board[row][col] == player and board[row + 1][col + 1] == player and board[row + 2][col + 2] == player and board[row + 3][col + 3] == player and board[row + 4][col + 4] == player
 
     def is_diagonal_win_increasing(self, row, col, player):
         """Checks for a diagonal win with a increasing slope (such as \ ). Returns True if a win exists, False otherwise"""
+        board = self._board
         return board[row][col] == player and board[row + 1][col - 1] == player and board[row + 2][col - 2] == player and board[row + 3][col - 3] == player and board[row + 4][col - 4] == player
 
-    def print_board(self, board):
+    def print_board(self):
+        board = self._board
         top_border = ["_" for _ in range(15)]
         for r in board:
             displayed_row = "|"
@@ -145,7 +150,7 @@ class Board:
             print(displayed_row)
 
 if __name__ == '__main__':
-    board = FiveBoard()
+    board = Board()
     board.make_move(0, 0, 'o')
     board.make_move(6, 5, 'x')
     board.make_move(2, 1, 'x')
