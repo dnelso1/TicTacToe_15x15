@@ -51,7 +51,6 @@ class Board:
     def make_move(self, row, col, player):
         """Makes a move based on the given [row][col] position and which player is making a turn, 'x' or 'o'"""
         board = self._board
-        # self.print_board(board)
 
         # returns False if there is a player occupying the [row][col] space or if the game has been won or drawn
         if board[row][col] == player or self._current_state != "UNFINISHED":
@@ -97,7 +96,7 @@ class Board:
         available_moves = 0
         for row in range(len(board)):
             for col in range(len(board[row])):
-                # checks every space for an empty string;
+                # checks every space for a space (' ') string;
                 # if one is present and the game has not been won then available_moves is incremented by 1
                 if board[row][col] == ' ' and (self._current_state != "X_WON" or self._current_state != "O_WON"):
                     available_moves += 1
@@ -136,20 +135,26 @@ class Board:
         return board[row][col] == player and board[row + 1][col - 1] == player and board[row + 2][col - 2] == player and board[row + 3][col - 3] == player and board[row + 4][col - 4] == player
 
     def print_board(self):
+        print("\n\n\n\n")
         board = self._board
-        top_border = ["_" for _ in range(15)]
+        horizontal_border = " ---+---+---+---+---+---+---+---+---+---+---+---+---+---+---"
         for r in board:
             displayed_row = "|"
             for c in range(len(r)):
                 #print(r[c]),
-                displayed_row += f"{r[c]}|"
-                print(top_border)
+                displayed_row += f" {r[c]} |"
+            print(horizontal_border)
             print(displayed_row)
+        print(horizontal_border)
 
 if __name__ == '__main__':
     board = Board()
     board.make_move(0, 0, 'o')
+    board.print_board()
     board.make_move(6, 5, 'x')
+    board.print_board()
     board.make_move(2, 1, 'x')
+    board.print_board()
     board.make_move(3, 2, 'x')
+    board.print_board()
     print(board.get_current_state())
