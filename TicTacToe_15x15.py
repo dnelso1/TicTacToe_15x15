@@ -92,7 +92,7 @@ class FiveBoard:
         return False
 
     def is_draw(self):
-        """Checks the conditions for a DRAW. Returns the number of available moves remaining"""
+        """Checks the conditions for a DRAW, which is when all squares are filled, but there is no winner. Returns the number of available moves remaining"""
         board = self._board
         available_moves = 0
         for row in range(len(board)):
