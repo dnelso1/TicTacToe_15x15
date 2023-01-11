@@ -118,6 +118,10 @@ class Board:
         board = self._board
         return board[row][col] == player and board[row + 1][col - 1] == player and board[row + 2][col - 2] == player and board[row + 3][col - 3] == player and board[row + 4][col - 4] == player
 
+    def get_board(self):
+        """Returns the current board"""
+        return self._board
+
     def print_board(self):
         """Prints the board to the screen"""
         print("\n\n\n\n")
