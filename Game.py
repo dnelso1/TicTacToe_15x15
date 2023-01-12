@@ -1,4 +1,6 @@
 from Board import Board, board_inst
+import os
+import time
 
 class Game:
     def make_move(self, row, col, player) -> bool:
@@ -19,3 +21,23 @@ class Game:
             board_inst.set_current_state("DRAW")
 
         return True
+    
+    def play_game(self) -> None:
+        """Plays the game until it is finished"""
+        while board_inst.get_current_state() == 'UNFINISHED':
+            os.system('clear')
+            board_inst.print_board()
+            player = input("Who is making a move? (x/o) > ")
+            move = input(f"What is {player.upper()}'s move? (Enter a row,column coordinate: 1,4) > ")
+            move = tuple(move.split(","))
+            self.make_move(int(move[0]), int(move[1]), player.lower())
+        
+        os.system('clear')
+        if board_inst.get_current_state() == 'X_WON':
+            print("X Wins!!!")
+        elif board_inst.get_current_state() == 'O_WON':
+            print("O Wins!!!")
+        elif board_inst.get_current_state() == 'DRAW':
+            print("Sadly, it was a DRAW")
+        time.sleep(5)
+        os.system('clear')
