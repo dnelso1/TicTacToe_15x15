@@ -127,16 +127,18 @@ class Board:
 
     def print_board(self) -> None:
         """Prints the board to the screen"""
-        print("\n\n\n\n")
         board = self._board
         horizontal_border = " ---+---+---+---+---+---+---+---+---+---+---+---+---+---+---"
+        displayed_board = "\n\n"
         for r in board:
             displayed_row = "|"
             for c in range(len(r)):
                 #print(r[c]),
                 displayed_row += f" {r[c]} |"
-            print(horizontal_border)
-            print(displayed_row)
-        print(horizontal_border)
+            displayed_board += f"{horizontal_border}\n"
+            displayed_board += f"{displayed_row}\n"
+        displayed_board += f"{horizontal_border}"
+        print(displayed_board)
+        print('\033[33A\033[2K', end='')
 
 board_inst = Board()
