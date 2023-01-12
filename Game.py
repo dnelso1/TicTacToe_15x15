@@ -2,19 +2,24 @@ from Board import Board, board_inst
 
 class Game:
     def __init__(self) -> None:
+        """Initializes player 1 and 2 upon instantiation"""
         self._player1 = ''
         self._player2  = ''
 
     def set_player1(self, icon)  -> None:
+        """Sets the value of player1"""
         self._player1 = icon
 
     def set_player2(self, icon) -> None:
+        """Sets the value of player2"""
         self._player2 = icon
 
     def get_player1(self) -> str:
+        """Gets the value of player1"""
         return self._player1
 
     def get_player2(self) -> str:
+        """Gets the value of player2"""
         return self._player2
 
     def make_move(self, row, col, player) -> bool:
