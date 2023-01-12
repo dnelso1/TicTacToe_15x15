@@ -52,25 +52,28 @@ class Board:
         """Sets the current state of the board"""
         self._current_state = state
 
-    def is_winner(self, row, col, player) -> bool:
+    def is_winner(self, player) -> bool:
         """Checks if a player has won by getting 5 in a row horizontally, vertically, or diagonally."""
-        # checks for wins when the rows are between 0-10 and columns are between 0-10
-        if row <= 10 and col <= 10:
-            if self.is_vertical_win(row, col, player) or self.is_horizontal_win(row, col, player) or self.is_diagonal_win_decreasing(row, col, player) or self.is_diagonal_win_increasing(row, col, player):
-                return True
-        # checks for wins when the rows are between 11-14 and columns are between 0-10
-        elif row >= 11 and col <= 10:
-            if self.is_horizontal_win(row, col, player):
-                return True
-        # checks for wins when the rows are between 0-10 and columns are between 11-14
-        elif row <= 10 and col >= 11:
-            if self.is_vertical_win(row, col, player) or self.is_diagonal_win_increasing(row, col, player):
-                return True
-        # checks for wins when the rows are between 11-14 and columns are between 11-14
-        elif row >= 11 and col >= 11:
-            # checks for a vertical win
-            if self.is_vertical_win(row, col, player) or self.is_horizontal_win(row, col, player):
-                return True
+        board = self._board
+        for row in range(len(board)):
+            for col in range(len(board[row])):
+                # checks for wins when the rows are between 0-10 and columns are between 0-10
+                if row <= 10 and col <= 10:
+                    if self.is_vertical_win(row, col, player) or self.is_horizontal_win(row, col, player) or self.is_diagonal_win_decreasing(row, col, player) or self.is_diagonal_win_increasing(row, col, player):
+                        return True
+                # checks for wins when the rows are between 11-14 and columns are between 0-10
+                elif row >= 11 and col <= 10:
+                    if self.is_horizontal_win(row, col, player):
+                        return True
+                # checks for wins when the rows are between 0-10 and columns are between 11-14
+                elif row <= 10 and col >= 11:
+                    if self.is_vertical_win(row, col, player) or self.is_diagonal_win_increasing(row, col, player):
+                        return True
+                # checks for wins when the rows are between 11-14 and columns are between 11-14
+                elif row >= 11 and col >= 11:
+                    # checks for a vertical win
+                    if self.is_vertical_win(row, col, player) or self.is_horizontal_win(row, col, player):
+                        return True
         
         return False
 
